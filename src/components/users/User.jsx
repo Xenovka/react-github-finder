@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 import withRouter from "../../helpers/withRouter";
 import { Link } from "react-router-dom";
 import GithubContext from "../../context/github/githubContext";
@@ -7,10 +6,10 @@ import GithubContext from "../../context/github/githubContext";
 import Spinner from "../layout/Spinner";
 import Repos from "../repos/Repos";
 
-const User = ({ repos, getUserRepos, router }) => {
+const User = ({ router }) => {
   const githubContext = useContext(GithubContext);
 
-  const { getUser, loading, user } = githubContext;
+  const { getUser, getUserRepos, repos, loading, user } = githubContext;
 
   useEffect(() => {
     getUser(router.params.login);
@@ -93,11 +92,6 @@ const User = ({ repos, getUserRepos, router }) => {
       <Repos repos={repos} />
     </Fragment>
   );
-};
-
-User.propTypes = {
-  repos: PropTypes.array.isRequired,
-  getUserRepos: PropTypes.func.isRequired
 };
 
 export default withRouter(User);
